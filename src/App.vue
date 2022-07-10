@@ -1,8 +1,8 @@
 <template>
 
-  <header>
-    <h1>RWR 服务器状态</h1>
-  </header>
+  <suspense>
+    <MyHeader />
+  </suspense>
 
   <suspense>
     <ServerGroupRoot />
@@ -12,5 +12,6 @@
 
 <script lang="ts" scoped setup>
 import ServerGroupRoot from './components/ServerGroupRoot.vue';
+import MyHeader from './components/MyHeader.vue';
 
 </script>
