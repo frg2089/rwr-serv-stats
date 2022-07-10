@@ -17,5 +17,8 @@
     "dev": "vite",
     "build": "vite build",
     "serve": "vite preview"
+  },
+  "dependencies": {
+    "vue": "^3.2.37"
   }
 }
