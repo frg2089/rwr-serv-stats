@@ -1,6 +1,7 @@
 env:
   browser: true
   es2021: true
+  vue: true
 extends:
   - plugin:vue/essential
   - standard
@@ -11,4 +12,5 @@ parserOptions:
 plugins:
   - vue
   - '@typescript-eslint'
-rules: {}
+rules: {
+}

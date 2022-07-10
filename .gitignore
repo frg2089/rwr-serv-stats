@@ -7,3 +7,9 @@
 # Documentation here: https://yarnpkg.com/features/zero-installs
 # !/.yarn/cache
 /.pnp.*
+
+# DO NOT Push server list in network repo.
+/public/servers.json
+
+# ignore build output
+/dist
