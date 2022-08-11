@@ -48,6 +48,50 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@fortawesome/fontawesome-common-types@npm:6.1.2":
+  version: 6.1.2
+  resolution: "@fortawesome/fontawesome-common-types@npm:6.1.2"
+  checksum: 16ba97f73256adef5cd680a027e6dbd3e76f34ba9227f7bd9e8c372cb4f337c7ccbf41f35dcfbc22b11320bbb579d01daccf1aa7ae47df5d0b17260c0097bb30
+  languageName: node
+  linkType: hard
+
+"@fortawesome/fontawesome-svg-core@npm:^6.1.2":
+  version: 6.1.2
+  resolution: "@fortawesome/fontawesome-svg-core@npm:6.1.2"
+  dependencies:
+    "@fortawesome/fontawesome-common-types": 6.1.2
+  checksum: bb82ed1e79ade9977746b4bb28ac0d03de7557e7c923446adec78cb3447740aca0859e91d6310007d758055a1b8f3a6f740915f04cac738931135c9bdbfe5d32
+  languageName: node
+  linkType: hard
+
+"@fortawesome/free-brands-svg-icons@npm:^6.1.2":
+  version: 6.1.2
+  resolution: "@fortawesome/free-brands-svg-icons@npm:6.1.2"
+  dependencies:
+    "@fortawesome/fontawesome-common-types": 6.1.2
+  checksum: 178b7f97bf64dcc1589bff74fc73cd0de32f002d585254e5dfb362d16c21011a77c61439dd507873d288f3c93de615cfc63235622968b037d8d8ded2d56f1d81
+  languageName: node
+  linkType: hard
+
+"@fortawesome/free-solid-svg-icons@npm:^6.1.2":
+  version: 6.1.2
+  resolution: "@fortawesome/free-solid-svg-icons@npm:6.1.2"
+  dependencies:
+    "@fortawesome/fontawesome-common-types": 6.1.2
+  checksum: b7258cd092304f9bd1e557cd3a59e9ff560165631b04f16785da14ce3148873fa8e688d62f95d68f668be32e1207c47a1fe556978ae7e9573a5b0fec09fc0f0c
+  languageName: node
+  linkType: hard
+
+"@fortawesome/vue-fontawesome@npm:latest-3":
+  version: 3.0.1
+  resolution: "@fortawesome/vue-fontawesome@npm:3.0.1"
+  peerDependencies:
+    "@fortawesome/fontawesome-svg-core": ~1 || ~6
+    vue: ">= 3.0.0 < 4"
+  checksum: 0ba4f168d7b4cbc22477a9fa3d630f9da2799a285ec14d9ddad9b32773494aec98d00469c14b11fa86567fe5582cf08bafd3cf7e54db035def2e609ecbd71b84
+  languageName: node
+  linkType: hard
+
 "@gar/promisify@npm:^1.1.3":
   version: 1.1.3
   resolution: "@gar/promisify@npm:1.1.3"
@@ -138,6 +182,13 @@ __metadata:
   version: 0.0.29
   resolution: "@types/json5@npm:0.0.29"
   checksum: e60b153664572116dfea673c5bda7778dbff150498f44f998e34b5886d8afc47f16799280e4b6e241c0472aef1bc36add771c569c68fc5125fc2ae519a3eb9ac
+  languageName: node
+  linkType: hard
+
+"@types/node@npm:^18.7.1":
+  version: 18.7.1
+  resolution: "@types/node@npm:18.7.1"
+  checksum: f1e2b701b107f97be01da4c46845cd23bcdcb2865f9abbb2847546d09587e726ea207daca6f0d1e72196875ef8c62feeeff5f1c1f2070445acd6d1a61d815c7c
   languageName: node
   linkType: hard
 
@@ -2923,6 +2974,11 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "rwr-serv-stats@workspace:."
   dependencies:
+    "@fortawesome/fontawesome-svg-core": ^6.1.2
+    "@fortawesome/free-brands-svg-icons": ^6.1.2
+    "@fortawesome/free-solid-svg-icons": ^6.1.2
+    "@fortawesome/vue-fontawesome": latest-3
+    "@types/node": ^18.7.1
     "@typescript-eslint/eslint-plugin": latest
     "@typescript-eslint/parser": latest
     "@vitejs/plugin-vue": ^2.3.3
@@ -2933,7 +2989,6 @@ __metadata:
     eslint-plugin-n: ^15.0.0
     eslint-plugin-promise: ^6.0.0
     eslint-plugin-vue: latest
-    postcss: ^8.4.14
     tailwindcss: ^3.1.5
     typescript: ^4.7.4
     vite: ^2.9.14
