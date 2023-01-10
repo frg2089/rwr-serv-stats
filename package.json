@@ -8,14 +8,16 @@
     "@vitejs/plugin-vue": "^4.0.0",
     "autoprefixer": "^10.4.13",
     "eslint": "^8.31.0",
-    "eslint-config-standard": "^17.0.0",
+    "eslint-config-standard-with-typescript": "^26.0.0",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-n": "^15.6.0",
     "eslint-plugin-promise": "^6.1.1",
     "eslint-plugin-vue": "^9.8.0",
+    "postcss": "^8.4.21",
     "tailwindcss": "^3.2.4",
     "typescript": "^4.9.4",
-    "vite": "^4.0.4"
+    "vite": "^4.0.4",
+    "vue-eslint-parser": "^9.1.0"
   },
   "scripts": {
     "dev": "vite",
@@ -24,8 +26,9 @@
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.1.2",
-    "@fortawesome/free-brands-svg-icons": "^6.1.2",
-    "@fortawesome/free-solid-svg-icons": "^6.1.2",
+    "@fortawesome/free-brands-svg-icons": "^6.2.1",
+    "@fortawesome/free-regular-svg-icons": "^6.2.1",
+    "@fortawesome/free-solid-svg-icons": "^6.2.1",
     "@fortawesome/vue-fontawesome": "latest-3",
     "vue": "^3.2.45"
   },

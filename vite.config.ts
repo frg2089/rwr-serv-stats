@@ -19,5 +19,13 @@ export default defineConfig({
     alias: {
       '@': path.resolve(__dirname, 'src')
     }
+  },
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://rwr.runningwithrifles.com/',
+        rewrite: path => path.replace(/^\/api/, '')
+      }
+    }
   }
 })

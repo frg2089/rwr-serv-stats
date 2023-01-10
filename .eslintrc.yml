@@ -1,16 +1,20 @@
 env:
   browser: true
   es2021: true
-  vue: true
 extends:
-  - plugin:vue/essential
-  - standard
+  - plugin:vue/vue3-recommended
+  - standard-with-typescript
+overrides: []
+parser: vue-eslint-parser
 parserOptions:
-  ecmaVersion: latest
   parser: '@typescript-eslint/parser'
+  ecmaVersion: latest
   sourceType: module
+  extraFileExtensions:
+    - .vue
+  project:
+    - ./tsconfig.json
 plugins:
   - vue
-  - '@typescript-eslint'
 rules: {
 }
