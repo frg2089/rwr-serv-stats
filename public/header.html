@@ -1,11 +1,9 @@
 <span class="title">RWR 服务器列表</span>
 <span class="question">?</span>
 <div class="box1">
-  > 若图片无法加载可能是 rwrstats.com 服务器出现问题 <br>
-  <br>
-  > 若图片加载后，图片内显示 Error，则服务器可能在换图 <br>
-  <br>
-  > 若长期图片加载后显示 Error，请联系服务器管理员
+  <li>若所有信息无法获取, 可能是 http://rwr.runningwithrifles.com/rwr_server_list 服务器出现问题</li>
+  <li>若单独几个信息无法获取，则服务器可能在换图</li>
+  <li>若长期所有信息无法获取，请联系服务器管理员</li>
 </div>
 <style>
   span.title {
@@ -29,6 +27,10 @@
     border-radius: 1rem;
     overflow: hidden;
     background-color: rgba(96, 96, 96, .6);
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: left;
+    list-style-type: '> ';
   }
 
   div.box1::before {
