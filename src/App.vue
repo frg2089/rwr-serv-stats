@@ -6,27 +6,25 @@
   />
   <!-- eslint-enable vue/no-v-html -->
 
-  <!-- <JsonServerList :groups="servGroups!" /> -->
-  <RWRServerList :servers="servers!" />
+  <RWRServerGroupPane :groups="groups" />
 </template>
 
 <script lang="ts" scoped setup>
-import { headerUri } from '@/URIs'
-import { onMounted, ref } from 'vue'
-import RWRServerList from './components/RWRServerList.vue'
-// import JsonServerList from './components/JsonServerList.vue'
-// import { ServerGroupMap } from './models'
-// import { getServerMap } from './source.json'
-import { getServerList, ServerInfo } from './source.rwr'
+import { onMounted, Ref, ref } from 'vue'
+import { getServers, ServerGroups } from './utils/servers'
+import { getConfig } from './utils/config'
+import { getHeader } from './utils/header'
+import RWRServerGroupPane from './components/RWRServerGroupPane.vue'
 
-const html = ref<string>()
-// const servGroups = ref<ServerGroupMap>()
-const servers = ref<Partial<ServerInfo>[]>()
+const html = ref('')
+const isModern = ref(false)
+const groups: Ref<ServerGroups> = ref({})
 
-onMounted(async () => {
-  const res = await fetch(headerUri)
-  html.value = await res.text()
-  // servGroups.value = await getServerMap()
-  servers.value = await getServerList({ start: 0, size: 100, names: 1 })
-})
+const init = () => {
+  getConfig().then(({ uri }) => (isModern.value = !!uri.api))
+  getHeader().then(i => (html.value = i))
+  getServers({}).then(i => { groups.value = i })
+}
+
+onMounted(init)
 </script>

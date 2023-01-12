@@ -1,0 +1,7 @@
+{
+  "uri": {
+    "servers": "./servers.json",
+    "header": "./header.html",
+    "api": "/api"
+  }
+}

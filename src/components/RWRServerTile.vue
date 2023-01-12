@@ -1,5 +1,37 @@
 <template>
-  <div class="bg-neutral-alt grid gap-1 p-1 break-inside-avoid">
+  <div
+    v-if="(typeof server === 'string')"
+    class="w-485 p-1 hover:bg-primary hover:border-primary-light break-inside-avoid"
+  >
+    <h3
+      v-if="showTitle"
+      class="text-primary-light border-2 border-b-0 border-neutral bg-neutral-secondary-alt text-center font-bold"
+    >
+      {{ name }}
+    </h3>
+    <img
+      :src="getImageUri(server)"
+      :alt="name"
+    >
+    <div class="grid grid-cols-2 gap-1 border-2 border-t-0 border-neutral bg-neutral-secondary-alt">
+      <RWRButton
+        :href="getInfoUri(server)"
+        :icon="faInfo"
+      >
+        显示服务器详情
+      </RWRButton>
+      <RWRButton
+        :href="getSteamUri(server)"
+        :icon="faSteamSymbol"
+      >
+        加入服务器
+      </RWRButton>
+    </div>
+  </div>
+  <div
+    v-else
+    class="w-485 bg-neutral-alt grid gap-1 p-1 break-inside-avoid"
+  >
     <table class="border-2 border-neutral">
       <thead>
         <tr>
@@ -86,19 +118,23 @@
 </template>
 
 <script lang="ts" scoped setup>
-import { getInfoUri } from '@/rwrstats'
-import { ServerInfo } from '@/source.rwr'
-import { getSteamUri } from '@/steam'
+import { getImageUri, getInfoUri } from '@/utils/rwrstats'
+import { ServerDetail } from '@/utils/servers'
+import { getSteamUri } from '@/utils/steam'
 import { faSteamSymbol } from '@fortawesome/free-brands-svg-icons'
 import { faInfo } from '@fortawesome/free-solid-svg-icons'
 import { ref } from 'vue'
 import DescriptionsItem from './DescriptionsItem.vue'
 import RWRButton from './RWRButton.vue'
 
-const showPlayerList = ref(false)
+export interface RWRServerTileProps{
+  server: string | Partial<ServerDetail>
+  name?: string
+}
 
-defineProps<{
-  server: Partial<ServerInfo>
-}>()
+const showPlayerList = ref(false)
+const showTitle = ref(true)
+
+defineProps<RWRServerTileProps>()
 
 </script>
