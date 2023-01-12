@@ -1,0 +1,12 @@
+version: '2'
+services:
+  web:
+    image: caddy:alpine
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - ./dist:/usr/share/caddy
+    environment:
+      - WEB_HOST=:80

@@ -1,0 +1,15 @@
+{$WEB_HOST} {
+	handle /api/* {
+		uri strip_prefix /api
+		reverse_proxy http://rwr.runningwithrifles.com
+	}
+
+	handle /* {
+		root * /usr/share/caddy
+		try_files {path} /index.html
+		file_server {
+			precompressed zstd br gzip
+		}
+		encode zstd gzip #开启zip
+	}
+}
