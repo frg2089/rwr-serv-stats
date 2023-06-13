@@ -5,14 +5,32 @@ env:
 extends:
   - standard-with-typescript
   - plugin:vue/vue3-recommended
+  - "@unocss"
 parser: vue-eslint-parser
 parserOptions:
-  parser: '@typescript-eslint/parser'
+  parser: "@typescript-eslint/parser"
   ecmaVersion: latest
   sourceType: module
+  ecmaFeatures:
+    jsx: true
   project:
     - ./tsconfig.json
     - ./tsconfig.node.json
+  extraFileExtensions:
+    - '.vue'
 plugins:
   - vue
-rules: {}
+globals:
+  RWRModel: readonly
+rules:
+  vue/html-indent:
+    - error
+    - 2
+    - baseIndent: 0
+      attribute: 2
+  vue/max-attributes-per-line:
+    - error
+    - singleline:
+        max: 4
+      multiline:
+        max: 4

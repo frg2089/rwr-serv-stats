@@ -1,0 +1,9 @@
+{
+  "recommendations": [
+    "vue.volar",
+    "vue.vscode-typescript-vue-plugin",
+    "arcanis.vscode-zipfs",
+    "dbaeumer.vscode-eslint",
+    "antfu.unocss"
+  ]
+}
