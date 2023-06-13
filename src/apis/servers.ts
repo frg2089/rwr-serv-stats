@@ -6,7 +6,7 @@ export const getServerList = async (params?: Partial<RWRModel.Request.Advanced.S
     response: 'json'
   }) as RWRModel.Response.SimpleServerGroups
 
-  if (import.meta.env.RWR_ADVANCED_INFO_URI == null) {
+  if (import.meta.env.RWR_ADVANCED_INFO_URI == null || import.meta.env.RWR_ADVANCED_INFO_URI === '') {
     return json
   }
 
