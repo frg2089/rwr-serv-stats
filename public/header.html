@@ -1,0 +1,52 @@
+<span class="title">RWR 服务器列表</span>
+<span class="question">?</span>
+<div class="box1">
+  <li>若所有信息无法获取, 可能是 http://rwr.runningwithrifles.com/rwr_server_list 服务器出现问题</li>
+  <li>若单独几个信息无法获取，则服务器可能在换图</li>
+  <li>若长期所有信息无法获取，请联系服务器管理员</li>
+</div>
+<style>
+  span.title {
+    font-size: 2rem;
+  }
+
+  span.question {
+    border: 1px solid;
+    border-radius: 50%;
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+    text-align: center;
+    line-height: .8rem;
+  }
+
+  span.question+div.box1 {
+    display: none;
+    position: fixed;
+    padding: 8px 16px;
+    border-radius: 1rem;
+    overflow: hidden;
+    background-color: rgba(96, 96, 96, .6);
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: left;
+    list-style-type: '> ';
+  }
+
+  div.box1::before {
+    content: '';
+    position: absolute;
+    left: -2rem;
+    top: -2rem;
+    width: calc(100% + 4rem);
+    height: calc(100% + 4rem);
+    backdrop-filter: blur(10px);
+    filter: blur(5px);
+    z-index: -1;
+    filter: drop-shadow(1rem 1rem 15px rgba(0, 0, 0, .5));
+  }
+
+  span.question:hover+div.box1 {
+    display: block;
+  }
+</style>
