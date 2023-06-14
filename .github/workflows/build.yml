@@ -1,0 +1,70 @@
+name: 自动构建
+
+on:
+  push:
+    branches:
+      - master
+      - feat/**
+    paths:
+      - .github/workflows/build.yml
+      - 'public/**'
+      - 'src/**'
+      - 'index.html'
+      - 'package.json'
+      - 'yarn.lock'
+      - '*.config.ts'
+      - '.env.production'
+      - 'tsconfig.json'
+      - 'tsconfig.*.json'
+  pull_request:
+    branches:
+      - master
+    paths:
+      - .github/workflows/build.yml
+      - 'public/**'
+      - 'src/**'
+      - 'index.html'
+      - 'package.json'
+      - 'yarn.lock'
+      - '*.config.ts'
+      - '.env.production'
+      - 'tsconfig.json'
+      - 'tsconfig.*.json'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3.3.0
+
+      - name: 设置 Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: yarn
+
+      - name: 安装依赖
+        run: yarn install --frozen-lockfile
+
+      - name: 构建 基本版
+        env:
+          RWR_ADVANCED_INFO_URI: ''
+        run: yarn vite build
+
+      - name: 打包 基本版
+        uses: actions/upload-pages-artifact@v1
+        with:
+          name: basic
+          path: dist
+
+      - name: 构建 高级版
+        env:
+          RWR_ADVANCED_INFO_URI: '/api/rwr_server_list/get_server_list.php'
+        run: yarn vite build
+
+      - name: 打包 高级版
+        uses: actions/upload-pages-artifact@v1
+        with:
+          name: advance
+          path: dist
