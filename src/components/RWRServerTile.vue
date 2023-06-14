@@ -9,16 +9,16 @@
         border-neutral bg-neutral-secondary-alt text-center font-bold
         text-primary-light v-text="name"
     />
-    <img :src="getImageUri(server)" :alt="name">
+    <img :src="getImageUri(endpoint)" :alt="name">
     <div
         grid grid-cols-2 gap-1 border-2
         border-t-0 border-neutral bg-neutral-secondary-alt
     >
-      <RWRButton :href="getInfoUri(server)">
+      <RWRButton :href="detailUri">
         <i i-fa6-solid:info />
         显示服务器详情
       </RWRButton>
-      <RWRButton :href="getSteamUri(server)">
+      <RWRButton :href="runGameUri">
         <i i-fa6-brands:steam-symbol />
         加入服务器
       </RWRButton>
@@ -52,11 +52,11 @@
       <tr>
         <td colspan="2">
           <div grid grid-cols-2 gap-1>
-            <RWRButton :href="getInfoUri(`${server.address}:${server.port}`)">
+            <RWRButton :href="detailUri">
               <i i-fa6-solid:info />
               显示服务器详情
             </RWRButton>
-            <RWRButton :href="getSteamUri(`${server.address}:${server.port}`)">
+            <RWRButton :href="runGameUri">
               <i i-fa6-brands:steam-symbol />
               加入服务器
             </RWRButton>
@@ -87,8 +87,8 @@
 </template>
 
 <script lang="ts" scoped setup>
-import { getImageUri, getInfoUri, getSteamUri } from '@/apis/servers'
-import { ref } from 'vue'
+import { getImageUri, getDetailUri, getRunGameUri } from '@/apis/servers'
+import { computed, onMounted, reactive, ref } from 'vue'
 import DescriptionsItem from './DescriptionsItem.vue'
 import RWRButton from './RWRButton.vue'
 
@@ -99,6 +99,28 @@ export interface RWRServerTileProps {
 
 const showPlayerList = ref(false)
 
-defineProps<RWRServerTileProps>()
+const props = defineProps<RWRServerTileProps>()
 
+const endpoint = reactive({
+  address: '',
+  port: 0
+})
+const detailUri = computed(() => getDetailUri(endpoint))
+const runGameUri = computed(() => getRunGameUri(endpoint))
+
+const init = () => {
+  if (typeof props.server !== 'string') {
+    if (props.server.address == null) throw new Error('Cannot get Server Address')
+    if (props.server.port == null) throw new Error('Cannot get Server Port')
+    endpoint.address = props.server.address
+    endpoint.port = props.server.port
+  } else {
+    const tmp = props.server.split(':')
+    if (tmp.length < 2) throw new Error('Cannot get Server Port')
+    endpoint.address = tmp[0]
+    endpoint.port = Number(tmp[1])
+  }
+}
+
+onMounted(init)
 </script>

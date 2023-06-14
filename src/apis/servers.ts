@@ -1,6 +1,6 @@
 import { parseElement, request } from './kernel'
 
-export const getServerList = async (params?: Partial<RWRModel.Request.Advanced.ServerQuery>): Promise<RWRModel.Response.ServerGroups> => {
+export const getServerList = async (): Promise<RWRModel.Response.ServerGroups> => {
   const json = await request({
     uri: import.meta.env.RWR_SERVER_LIST,
     response: 'json'
@@ -11,9 +11,9 @@ export const getServerList = async (params?: Partial<RWRModel.Request.Advanced.S
   }
 
   const query: Record<string, string> = {
-    start: `${params?.start ?? 0}`,
-    size: `${params?.size ?? 100}`,
-    names: `${params?.names ?? 1}`
+    start: `${import.meta.env.RWR_ADVANCED_INFO_PARAMS_START ?? 0}`,
+    size: `${import.meta.env.RWR_ADVANCED_INFO_PARAMS_SIZE ?? 100}`,
+    names: `${import.meta.env.RWR_ADVANCED_INFO_PARAMS_NAMES ?? 1}`
   }
 
   const xml = await request({
@@ -61,15 +61,11 @@ export const getNotice = async (): Promise<string> => await request({
   response: 'plain'
 })
 
-export const getImageUri = (addr: string): string =>
-  `https://rwrstats.com/images/servers/${addr.replace(':', '-')}.png`
+export const getImageUri = ({ address, port }: { address: string, port: number }): string =>
+  `https://rwrstats.com/images/servers/${address}-${port}.png`
 
-export const getInfoUri = (addr: string): string =>
-  `https://rwrstats.com/servers/${addr}`
+export const getDetailUri = ({ address, port }: { address: string, port: number }): string =>
+  `https://rwrstats.com/servers/${address}:${port}`
 
-export const getSteamUri = (addr: string): string => {
-  const split = addr.split(':')
-  const address = split[0]
-  const port = split.length > 1 ? split[1] : '1234'
-  return `steam://rungameid/270150//server_address=${address} server_port=${port}/`
-}
+export const getRunGameUri = ({ address, port }: { address: string, port: number }): string =>
+  `steam://rungameid/270150//server_address=${address} server_port=${port}/`

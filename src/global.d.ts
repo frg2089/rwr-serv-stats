@@ -2,4 +2,7 @@ interface ImportMetaEnv {
   RWR_SERVER_LIST: string
   RWR_NOTICE_URI: string
   RWR_ADVANCED_INFO_URI?: string
+  RWR_ADVANCED_INFO_PARAMS_START?: string
+  RWR_ADVANCED_INFO_PARAMS_SIZE?: string
+  RWR_ADVANCED_INFO_PARAMS_NAMES?: string
 }
