@@ -7,7 +7,7 @@
 
 |基本版|高级版|
 |:-:|:-:|
-|![basic](.github\preview\basic.jpeg)|![advance](.github\preview\advance.jpeg)|
+|![basic](.github/preview/basic.jpeg)|![advance](.github/preview/advance.jpeg)|
 
 ## 获取方式
 
