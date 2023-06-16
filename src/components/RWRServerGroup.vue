@@ -27,7 +27,7 @@ import RWRServerTile from './RWRServerTile.vue'
 
 export interface RWRServerGroupProps {
   title: string
-  servers: RWRModel.Response.Servers
+  servers: RWRModel.Servers
 }
 
 const props = defineProps<RWRServerGroupProps>()

@@ -14,7 +14,7 @@ import { getNotice, getServerList } from '@/apis/servers'
 import RWRServerGroup from './components/RWRServerGroup.vue'
 
 const html = ref('')
-const groups: Ref<RWRModel.Response.ServerGroups> = ref({})
+const groups: Ref<RWRModel.ServerGroups> = ref({})
 
 const refresh = () => {
   getNotice().then(i => (html.value = i))

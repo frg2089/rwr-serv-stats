@@ -93,7 +93,7 @@ import DescriptionsItem from './DescriptionsItem.vue'
 import RWRButton from './RWRButton.vue'
 
 export interface RWRServerTileProps {
-  server: RWRModel.Response.Server
+  server: RWRModel.Server
   name: string
 }
 
