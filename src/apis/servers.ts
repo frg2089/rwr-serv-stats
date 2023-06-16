@@ -6,33 +6,40 @@ export const getServerList = async (): Promise<RWRModel.Response.ServerGroups> =
     response: 'json'
   }) as RWRModel.Response.SimpleServerGroups
 
-  if (import.meta.env.RWR_ADVANCED_INFO_URI == null || import.meta.env.RWR_ADVANCED_INFO_URI === '') {
-    return json
-  }
+  const xml = await new Promise<Document | null>((resolve, reject) => {
+    if (import.meta.env.RWR_ADVANCED_INFO_URI == null) {
+      resolve(null)
+      return
+    }
 
-  const query: Record<string, string> = {
-    start: `${import.meta.env.RWR_ADVANCED_INFO_PARAMS_START ?? 0}`,
-    size: `${import.meta.env.RWR_ADVANCED_INFO_PARAMS_SIZE ?? 100}`,
-    names: `${import.meta.env.RWR_ADVANCED_INFO_PARAMS_NAMES ?? 1}`
-  }
+    const xhr = new XMLHttpRequest()
+    xhr.open('GET', import.meta.env.RWR_ADVANCED_INFO_URI + '?' + new URLSearchParams({
+      start: `${import.meta.env.RWR_ADVANCED_INFO_PARAMS_START ?? 0}`,
+      size: `${import.meta.env.RWR_ADVANCED_INFO_PARAMS_SIZE ?? 100}`,
+      names: `${import.meta.env.RWR_ADVANCED_INFO_PARAMS_NAMES ?? 1}`
+    }).toString(), true)
+    xhr.onload = () => {
+      if (xhr.readyState !== 4) return
+      if (xhr.status === 200) {
+        resolve(xhr.responseXML)
+      } else {
+        reject(xhr.statusText)
+      }
+    }
+    xhr.onerror = reject
+  })
 
-  const xml = await request({
-    uri: import.meta.env.RWR_ADVANCED_INFO_URI,
-    response: 'plain',
-    query
-  }) as string
+  if (xml == null) return json
 
-  const parser = new DOMParser()
-  const doc = parser.parseFromString(xml, 'application/xml')
   const map: Record<string, Partial<RWRModel.Response.Advanced.ServerDetail>> = {}
 
-  new Array(...doc.querySelectorAll('server').values())
+  new Array(...xml.querySelectorAll('server').values())
     .map(parseElement)
     .forEach(i => {
       const { address, port } = i
       if (address == null || port == null) return
 
-      map[`${address}:${port}`] = i
+      map[`${address as string}:${port as number}`] = i
     })
 
   const result: RWRModel.Response.ServerGroups = {}
@@ -59,7 +66,7 @@ export const getServerList = async (): Promise<RWRModel.Response.ServerGroups> =
 export const getNotice = async (): Promise<string> => await request({
   uri: import.meta.env.RWR_NOTICE_URI,
   response: 'plain'
-})
+}) as string
 
 export const getImageUri = ({ address, port }: { address: string, port: number }): string =>
   `https://rwrstats.com/images/servers/${address}-${port}.png`
